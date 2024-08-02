@@ -29,6 +29,12 @@ async def get_messages(message: types.Message):
     response = "\n".join([f"{msg.get('username', 'Unknown User')}: {msg.get('content', 'No Content')}" for msg in messages])
     await message.reply(response if response else "No messages.")
 
+@dp.message(Command("clear"))
+async def clear_messages(message: types.Message):
+    result = await collection.delete_many({})
+    count = result.deleted_count
+    await message.reply(f"All messages have been deleted. {count} message(s) removed.")
+
 @dp.message()
 async def create_message(message: types.Message):
     user = message.from_user
