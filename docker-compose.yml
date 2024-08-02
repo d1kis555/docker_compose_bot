@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: web
+    depends_on:
+      - mongodb
+    networks:
+      - backend
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    networks:
+      - backend
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    networks:
+      - backend
+
+  telegram-bot:
+    build:
+      context: ./bot
+      dockerfile: Dockerfile
+    container_name: telegram-bot
+    environment:
+      - TELEGRAM_API_TOKEN=YOUR_TELEGRAM_BOT_TOKEN
+    depends_on:
+      - mongodb
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
