@@ -2,7 +2,7 @@ import asyncio
 from aiogram import Bot, Dispatcher, types
 from motor.motor_asyncio import AsyncIOMotorClient
 
-API_TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN'
+API_TOKEN = '7450075963:AAEydLGRWO-i7p-Pk6jhxE2XyjGDWpfvXhI'
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
