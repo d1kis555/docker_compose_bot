@@ -34,8 +34,8 @@ services:
       context: ./bot
       dockerfile: Dockerfile
     container_name: telegram-bot
-    environment:
-      - TELEGRAM_API_TOKEN=YOUR_TELEGRAM_BOT_TOKEN
+    env_file:
+      - .env
     depends_on:
       - mongodb
     networks:
